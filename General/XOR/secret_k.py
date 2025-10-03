@@ -40,9 +40,7 @@ def xor(data: ByteString, key: ByteString) -> bytes:
 
 
 def recover_known_key_bytes(ciphertext: ByteString, known_plaintext: ByteString, key_len: int) -> bytearray:
-    """
-    Recover key bytes at positions hit by the known prefix.
-    """
+    
     key = bytearray([0] * key_len)
     for i in range(min(len(known_plaintext), len(ciphertext))):
         key[i % key_len] = ciphertext[i] ^ known_plaintext[i]
@@ -50,9 +48,7 @@ def recover_known_key_bytes(ciphertext: ByteString, known_plaintext: ByteString,
 
 
 def anchor_last_brace(ciphertext: ByteString, key: bytearray) -> None:
-    """
-    Anchor the key so the plaintext ends with '}'.
-    """
+   
     if not ciphertext or not key:
         return
     pos = (len(ciphertext) - 1) % len(key)
@@ -240,3 +236,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
